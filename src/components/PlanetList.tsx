@@ -1,31 +1,28 @@
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
 import usePlanets from "../hooks/usePlanets";
 
 import type { Planet } from "../types/planet";
 
 const PlanetList = () => {
-  const { planets, isLoading, isError, error, isFetching, fetchNextPage } =
+  const { isError, error, canShowList, showMorePlanets, planets } =
     usePlanets();
 
-  const { ref, inView } = useInView();
+  if (!canShowList) {
+    return <>Spinner</>;
+  }
 
-  useEffect(() => {
-    if (inView) {
-      fetchNextPage();
-    }
-  }, [fetchNextPage, inView]);
+  if (isError) {
+    return <>{error?.message}</>;
+  }
+
   return (
-    <div>
-      {(isLoading || isFetching) && <>Spinner</>}
-      {isError && <>{error?.message}</>}
+    <>
       {planets?.map((planet: Planet) => (
         <div style={{ height: "100px" }} key={planet.name}>
           {planet.name}
         </div>
       ))}
-      <div ref={ref}></div>
-    </div>
+      <button onClick={showMorePlanets}>Carregar mais</button>
+    </>
   );
 };
 
