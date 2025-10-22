@@ -16,7 +16,7 @@ const PlanetDetails = () => {
   }
 
   if (error) {
-    <>{error.message}</>;
+    return <>{error.message}</>;
   }
 
   return (
@@ -30,7 +30,9 @@ const PlanetDetails = () => {
             />
           );
         }
+
         const keyInfo = `${key}: ${data[key]}`;
+        console.log({ keyInfo });
         return <div key={keyInfo}>{keyInfo}</div>;
       })}
     </div>

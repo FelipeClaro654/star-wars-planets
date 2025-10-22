@@ -1,3 +1,4 @@
+import type { Film } from "../types/film";
 import type { Planet } from "../types/planet";
 import type { Resident } from "../types/resident";
 import type { Specie } from "../types/specie";
@@ -48,4 +49,13 @@ export const fetchVehicleDetail = async (id = 1) => {
   }
   const vehicle: Vehicle = await response.json();
   return vehicle;
+};
+
+export const fetchFilmDetail = async (id = 1) => {
+  const response = await fetch(`${BASE_URL}/films/${id}`);
+  if (!response.ok) {
+    throw new Error("Erro ao carregar detalhe do filme");
+  }
+  const film: Film = await response.json();
+  return film;
 };
