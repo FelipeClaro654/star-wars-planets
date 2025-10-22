@@ -69,7 +69,7 @@ const usePlanets = () => {
       ?.sort(sortPlanetNames)
       .slice(startItem, endItem);
     const planetsFilteredBySearchName = planetsInPage?.filter((planet) =>
-      planet.name.includes(searchTerm)
+      planet.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return planetsFilteredBySearchName || [];

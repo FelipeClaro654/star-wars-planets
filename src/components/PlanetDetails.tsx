@@ -11,6 +11,10 @@ const PlanetDetails = () => {
     return <>Spinner...</>;
   }
 
+  if (!data) {
+    return <></>;
+  }
+
   if (error) {
     <>{error.message}</>;
   }
