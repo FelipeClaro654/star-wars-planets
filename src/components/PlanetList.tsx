@@ -3,8 +3,17 @@ import usePlanets from "../hooks/usePlanets";
 import type { Planet } from "../types/planet";
 
 const PlanetList = () => {
-  const { isError, error, canShowList, showMorePlanets, planets } =
-    usePlanets();
+  const {
+    isError,
+    error,
+    canShowList,
+    planets,
+    canGoToNextPage,
+    canGoToPreviousPage,
+    currentPage,
+    showNextPage,
+    showPreviousPage,
+  } = usePlanets();
 
   if (!canShowList) {
     return <>Spinner</>;
@@ -21,7 +30,14 @@ const PlanetList = () => {
           {planet.name}
         </div>
       ))}
-      <button onClick={showMorePlanets}>Carregar mais</button>
+      <button disabled={!canGoToPreviousPage} onClick={showPreviousPage}>
+        Voltar à página anterior
+      </button>
+      <button disabled={!canGoToNextPage} onClick={showNextPage}>
+        Ir para a próxima página
+      </button>
+
+      <h4>Página atual: {currentPage}</h4>
     </>
   );
 };

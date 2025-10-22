@@ -39,30 +39,54 @@ const usePlanets = () => {
     }
   }, [hasNextPage, fetchNextPage, isFetchingNextPage]);
 
+  const allResults = useMemo(
+    () => data?.pages?.flatMap((page) => page?.results),
+    [data?.pages]
+  );
+
+  const totalResults = useMemo(() => allResults?.length, [allResults]);
+
+  const totalPages = useMemo(() => {
+    if (totalResults) {
+      return Math.ceil(totalResults / 10);
+    }
+    return 0;
+  }, [totalResults]);
+
   const filteredPlanets = useMemo(() => {
     if (hasNextPage || isLoading) return [];
-
+    const startItem = (page - 1) * 10 + 1;
+    const endItem = Math.min(page * 10, Number(totalResults));
     return (
-      (data?.pages
-        ?.flatMap((page) => page?.results)
-        .sort(sortPlanetNames)
-        .slice(0, page * 10) as Planet[]) || []
+      (allResults
+        ?.sort(sortPlanetNames)
+        .slice(startItem, endItem) as Planet[]) || []
     );
-  }, [data, hasNextPage, isLoading, page]);
+  }, [hasNextPage, isLoading, page, allResults, totalResults]);
 
-  const showMorePlanets = useCallback(() => {
+  const showNextPage = useCallback(() => {
     setPage((actualPage) => actualPage + 1);
   }, []);
 
+  const showPreviousPage = useCallback(() => {
+    setPage((actualPage) => actualPage - 1);
+  }, []);
+
   const canShowList = !isLoading && !isFetching && !hasNextPage;
+  const canGoToNextPage = page < totalPages;
+  const canGoToPreviousPage = page > 1;
 
   return {
     planets: filteredPlanets,
+    currentPage: page,
     isError,
     error,
     hasNextPage,
-    showMorePlanets,
     canShowList,
+    showNextPage,
+    showPreviousPage,
+    canGoToNextPage,
+    canGoToPreviousPage,
   };
 };
 
