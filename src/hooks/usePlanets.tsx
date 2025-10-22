@@ -5,16 +5,23 @@ const usePlanets = () => {
   const { data, isLoading, isError, error, isFetching, fetchNextPage } =
     useInfiniteQuery({
       queryKey: ["planets"],
-      queryFn: ({ pageParam }: { pageParam: number }) =>
-        fetchPlanets(pageParam),
+      queryFn: ({ pageParam }: { pageParam: number }) => {
+        return fetchPlanets(pageParam);
+      },
       initialPageParam: 1,
       getNextPageParam: (data) => {
-        return data.next;
+        if (!data.next) {
+          return;
+        }
+
+        const url = new URL(data?.next);
+        const params = new URLSearchParams(url.search);
+        return Number(params.get("page"));
       },
       staleTime: 360000,
     });
 
-  const planets = data?.pages ? data.pages[0].results : [];
+  const planets = data?.pages?.flatMap((page) => page?.results) || [];
   return {
     planets,
     isLoading,
