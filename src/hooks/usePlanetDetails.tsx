@@ -3,7 +3,7 @@ import { fetchPlanetDetail } from "../services/planetsService";
 
 const usePlanetDetails = ({ id }: { id?: number }) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ["planetDetail"],
+    queryKey: ["planetDetail", id],
     queryFn: () => fetchPlanetDetail(id),
   });
 

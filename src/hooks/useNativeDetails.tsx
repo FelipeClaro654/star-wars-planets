@@ -10,7 +10,7 @@ const useResidentDetails = ({ residentUrl }: useResidentDetailsProps) => {
   const id = getIdFromUrl(residentUrl);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["residentDetail"],
+    queryKey: ["residentDetail", id],
     queryFn: () => fetchResidentDetail(Number(id)),
   });
 
