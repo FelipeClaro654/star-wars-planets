@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import usePlanets from "../hooks/usePlanets";
 
 import type { Planet } from "../types/planet";
@@ -36,7 +37,7 @@ const PlanetList = () => {
       />
       {planets?.map((planet: Planet) => (
         <div style={{ height: "100px" }} key={planet.name}>
-          {planet.name}
+          <Link to={`/planets/${planet.id}`}>{planet.name}</Link>
         </div>
       ))}
       <button disabled={!canGoToPreviousPage} onClick={showPreviousPage}>

@@ -8,4 +8,5 @@ export type Planet = {
   residents: [];
   rotation_period: string;
   terrain: string;
+  id?: number;
 };

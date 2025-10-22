@@ -1,7 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchPlanets } from "../services/planetsService";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { Planet } from "../types/planet";
 import { sortPlanetNames } from "../utils/sort";
 
 const usePlanets = () => {
@@ -40,10 +39,18 @@ const usePlanets = () => {
     }
   }, [hasNextPage, fetchNextPage, isFetchingNextPage]);
 
-  const allResults = useMemo(
-    () => data?.pages?.flatMap((page) => page?.results),
-    [data?.pages]
-  );
+  const allResults = useMemo(() => {
+    if (hasNextPage) {
+      return [];
+    }
+    const flatResult = data?.pages?.flatMap((page) => page?.results);
+
+    const mappedResult = flatResult?.map((planet, index) => {
+      return { ...planet, id: index + 1 };
+    });
+
+    return mappedResult;
+  }, [data?.pages, hasNextPage]);
 
   const totalResults = useMemo(() => allResults?.length, [allResults]);
 
@@ -58,11 +65,14 @@ const usePlanets = () => {
     if (hasNextPage || isLoading) return [];
     const startItem = (page - 1) * 10 + 1;
     const endItem = Math.min(page * 10, Number(totalResults));
-    return (
-      (
-        allResults?.sort(sortPlanetNames).slice(startItem, endItem) as Planet[]
-      ).filter((planet) => planet.name.includes(searchTerm)) || []
+    const planetsInPage = allResults
+      ?.sort(sortPlanetNames)
+      .slice(startItem, endItem);
+    const planetsFilteredBySearchName = planetsInPage?.filter((planet) =>
+      planet.name.includes(searchTerm)
     );
+
+    return planetsFilteredBySearchName || [];
   }, [hasNextPage, isLoading, page, allResults, totalResults, searchTerm]);
 
   const showNextPage = useCallback(() => {
