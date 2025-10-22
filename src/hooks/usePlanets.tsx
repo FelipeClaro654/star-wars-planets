@@ -6,6 +6,7 @@ import { sortPlanetNames } from "../utils/sort";
 
 const usePlanets = () => {
   const [page, setPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
   const {
     data,
     isLoading,
@@ -58,11 +59,11 @@ const usePlanets = () => {
     const startItem = (page - 1) * 10 + 1;
     const endItem = Math.min(page * 10, Number(totalResults));
     return (
-      (allResults
-        ?.sort(sortPlanetNames)
-        .slice(startItem, endItem) as Planet[]) || []
+      (
+        allResults?.sort(sortPlanetNames).slice(startItem, endItem) as Planet[]
+      ).filter((planet) => planet.name.includes(searchTerm)) || []
     );
-  }, [hasNextPage, isLoading, page, allResults, totalResults]);
+  }, [hasNextPage, isLoading, page, allResults, totalResults, searchTerm]);
 
   const showNextPage = useCallback(() => {
     setPage((actualPage) => actualPage + 1);
@@ -87,6 +88,7 @@ const usePlanets = () => {
     showPreviousPage,
     canGoToNextPage,
     canGoToPreviousPage,
+    setSearchTerm,
   };
 };
 

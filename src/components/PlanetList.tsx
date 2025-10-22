@@ -13,6 +13,7 @@ const PlanetList = () => {
     currentPage,
     showNextPage,
     showPreviousPage,
+    setSearchTerm,
   } = usePlanets();
 
   if (!canShowList) {
@@ -25,6 +26,14 @@ const PlanetList = () => {
 
   return (
     <>
+      <input
+        type="text"
+        placeholder="Buscar Nome"
+        onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
+          const searchTerm = e.currentTarget.value;
+          setSearchTerm(searchTerm);
+        }}
+      />
       {planets?.map((planet: Planet) => (
         <div style={{ height: "100px" }} key={planet.name}>
           {planet.name}
