@@ -42,7 +42,7 @@ const PlanetPagination = (props: PlanetPaginationProps) => {
               {Array.from({ length: props.totalPages }).map((_, index) => {
                 const pageNumber = index + 1;
                 return (
-                  <PaginationItem>
+                  <PaginationItem key={pageNumber}>
                     <PaginationLink
                       href="#"
                       isActive={props.currentPage === pageNumber}

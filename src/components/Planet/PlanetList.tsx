@@ -1,18 +1,14 @@
 import usePlanets from "../../hooks/usePlanets";
+import { Input } from "../ui/input";
+import { Spinner } from "../ui/spinner";
+import PlanetCard from "./PlanetCard";
+import PlanetPagination from "./PlanetPagination";
+import InfoAlerts from "../compounds/infoAlerts";
 
 import type { Planet } from "../../types/planet";
 
-import { Input } from "../ui/input";
-import { Spinner } from "../ui/spinner";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { AlertCircleIcon } from "lucide-react";
-
-import PlanetCard from "./PlanetCard";
-import PlanetPagination from "./PlanetPagination";
-
 const PlanetList = () => {
   const {
-    isError,
     error,
     canShowList,
     planets,
@@ -35,14 +31,8 @@ const PlanetList = () => {
     );
   }
 
-  if (isError) {
-    return (
-      <Alert variant="destructive">
-        <AlertCircleIcon />
-        <AlertTitle>Error!</AlertTitle>
-        <AlertDescription>{error?.message}</AlertDescription>
-      </Alert>
-    );
+  if (error) {
+    return <InfoAlerts message={error?.message} />;
   }
 
   return (
