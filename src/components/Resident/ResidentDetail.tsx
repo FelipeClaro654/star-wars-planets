@@ -2,10 +2,11 @@ import React from "react";
 import useResidentDetails from "../../hooks/useResidentDetails";
 import Species from "../Specie/Species";
 import Vehicles from "../Vehicle/Vehicles";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { AlertCircleIcon } from "lucide-react";
 import { Spinner } from "../ui/spinner";
-import { Separator } from "../ui/separator";
+import { Label } from "../ui/label";
+import { Card, CardContent } from "../ui/card";
+import InfoAlerts from "../compounds/infoAlerts";
+import ErrorAlerts from "../compounds/ErrorAlerts";
 
 type ResidentDetailProps = {
   residentUrl: string;
@@ -19,37 +20,28 @@ const ResidentDetail = ({ residentUrl }: ResidentDetailProps) => {
   }
 
   if (!data) {
-    return <></>;
-  }
-
-  if (!isLoading && !data) {
     return (
-      <Alert>
-        <AlertCircleIcon />
-        <AlertTitle>There is no information about this resident!</AlertTitle>
-      </Alert>
+      <InfoAlerts message="There is no information about this resident!" />
     );
   }
 
   if (error) {
-    return (
-      <Alert variant="destructive">
-        <AlertCircleIcon />
-        <AlertTitle>Error!</AlertTitle>
-        <AlertDescription>{error?.message}</AlertDescription>
-      </Alert>
-    );
+    return <ErrorAlerts message={error.message} />;
   }
 
   return (
-    <>
-      <div>{data.name}</div>
-      <div>{data.hair_color}</div>
-      <div>{data.eye_color}</div>
-      <div>{data.gender}</div>
-      <Species speciesUrls={data.species} />
-      <Vehicles vehiclesUrls={data.vehicles} />
-    </>
+    <Card>
+      <CardContent>
+        <Label className="font-bold">{data.name}</Label>
+        <div className="mt-1.5">
+          <div>{`Hair color: ${data.hair_color}`}</div>
+          <div>{`Eye color: ${data.eye_color}`}</div>
+          <div>{`Gender: ${data.gender}`}</div>
+        </div>
+        <Species speciesUrls={data.species} />
+        <Vehicles vehiclesUrls={data.vehicles} />
+      </CardContent>
+    </Card>
   );
 };
 

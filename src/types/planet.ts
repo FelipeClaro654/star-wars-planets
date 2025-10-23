@@ -5,7 +5,7 @@ export type Planet = {
   name: string;
   orbital_period: string;
   population: string;
-  residents: [];
+  residents: string[];
   rotation_period: string;
   terrain: string;
   films: string[];

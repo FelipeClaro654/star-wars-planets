@@ -1,8 +1,8 @@
 import React from "react";
 import useSpecie from "../../hooks/useSpecie";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { AlertCircleIcon } from "lucide-react";
 import { Spinner } from "../ui/spinner";
+import InfoAlerts from "../compounds/infoAlerts";
+import ErrorAlerts from "../compounds/ErrorAlerts";
 
 type SpecieProps = {
   specieUrl: string;
@@ -14,14 +14,12 @@ const Specie = ({ specieUrl }: SpecieProps) => {
     return <Spinner />;
   }
 
+  if (!data) {
+    return <InfoAlerts message="There is no information about this specie!" />;
+  }
+
   if (error) {
-    return (
-      <Alert variant="destructive">
-        <AlertCircleIcon />
-        <AlertTitle>Error!</AlertTitle>
-        <AlertDescription>{error?.message}</AlertDescription>
-      </Alert>
-    );
+    return <ErrorAlerts message={error.message} />;
   }
   return <div>{data?.name}</div>;
 };

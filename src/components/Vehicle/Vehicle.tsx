@@ -15,6 +15,15 @@ const Vehicle = ({ vehicleUrl }: VehicleProps) => {
     return <Spinner />;
   }
 
+  if (!data) {
+    return (
+      <Alert>
+        <AlertCircleIcon />
+        <AlertTitle>There is no information about this vehicle!</AlertTitle>
+      </Alert>
+    );
+  }
+
   if (error) {
     return (
       <Alert variant="destructive">

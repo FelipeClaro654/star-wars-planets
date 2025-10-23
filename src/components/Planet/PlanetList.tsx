@@ -7,10 +7,8 @@ import { Spinner } from "../ui/spinner";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { AlertCircleIcon } from "lucide-react";
 
-import { Button } from "../ui/button";
-import { Card, CardAction, CardDescription } from "../ui/card";
-import { Label } from "../ui/label";
 import PlanetCard from "./PlanetCard";
+import PlanetPagination from "./PlanetPagination";
 
 const PlanetList = () => {
   const {
@@ -18,12 +16,12 @@ const PlanetList = () => {
     error,
     canShowList,
     planets,
+    setSearchTerm,
     canGoToNextPage,
     canGoToPreviousPage,
     currentPage,
     showNextPage,
     showPreviousPage,
-    setSearchTerm,
     totalPages,
   } = usePlanets();
 
@@ -59,21 +57,14 @@ const PlanetList = () => {
         <PlanetCard key={planet.id} {...planet} />
       ))}
 
-      <Card className="w-full max-w pr-3">
-        <CardDescription>
-          <CardAction className="flex gap-2">
-            <Label>
-              Current page: {currentPage} / {totalPages}
-            </Label>
-            <Button disabled={!canGoToPreviousPage} onClick={showPreviousPage}>
-              Back Page
-            </Button>
-            <Button disabled={!canGoToNextPage} onClick={showNextPage}>
-              Next Page
-            </Button>
-          </CardAction>
-        </CardDescription>
-      </Card>
+      <PlanetPagination
+        canGoToNextPage={canGoToNextPage}
+        canGoToPreviousPage={canGoToPreviousPage}
+        currentPage={currentPage}
+        showNextPage={showNextPage}
+        showPreviousPage={showPreviousPage}
+        totalPages={totalPages}
+      />
     </div>
   );
 };
