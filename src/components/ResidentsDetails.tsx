@@ -1,3 +1,4 @@
+import React from "react";
 import ResidentDetail from "./ResidentDetail";
 
 type ResidentsDetailsProps = {
@@ -14,4 +15,4 @@ const ResidentsDetails = ({ residentsUrls }: ResidentsDetailsProps) => {
   ));
 };
 
-export default ResidentsDetails;
+export default React.memo(ResidentsDetails);

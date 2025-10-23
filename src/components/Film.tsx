@@ -1,3 +1,4 @@
+import React from "react";
 import useFilm from "../hooks/useFilm";
 
 type FilmProps = {
@@ -16,4 +17,4 @@ const Film = ({ filmUrl }: FilmProps) => {
   return <div>{data?.title}</div>;
 };
 
-export default Film;
+export default React.memo(Film);

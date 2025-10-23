@@ -1,3 +1,4 @@
+import React from "react";
 import Film from "./Film";
 
 type FilmsProps = {
@@ -14,4 +15,4 @@ const Films = ({ filmsUrls }: FilmsProps) => {
   );
 };
 
-export default Films;
+export default React.memo(Films);

@@ -1,3 +1,4 @@
+import React from "react";
 import useVehicle from "../hooks/useVehicle";
 
 type VehicleProps = {
@@ -23,4 +24,4 @@ const Vehicle = ({ vehicleUrl }: VehicleProps) => {
   );
 };
 
-export default Vehicle;
+export default React.memo(Vehicle);

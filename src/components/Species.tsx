@@ -1,3 +1,4 @@
+import React from "react";
 import Specie from "./Specie";
 
 type SpeciesProps = {
@@ -14,4 +15,4 @@ const Species = ({ speciesUrls }: SpeciesProps) => {
   );
 };
 
-export default Species;
+export default React.memo(Species);

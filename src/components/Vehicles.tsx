@@ -1,3 +1,4 @@
+import React from "react";
 import Vehicle from "./Vehicle";
 
 type VehiclesProps = {
@@ -14,4 +15,4 @@ const Vehicles = ({ vehiclesUrls }: VehiclesProps) => {
   );
 };
 
-export default Vehicles;
+export default React.memo(Vehicles);

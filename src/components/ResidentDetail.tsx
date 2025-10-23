@@ -1,3 +1,4 @@
+import React from "react";
 import useResidentDetails from "../hooks/useResidentDetails";
 import Species from "./Species";
 import Vehicles from "./Vehicles";
@@ -37,4 +38,4 @@ const ResidentDetail = ({ residentUrl }: ResidentDetailProps) => {
   );
 };
 
-export default ResidentDetail;
+export default React.memo(ResidentDetail);

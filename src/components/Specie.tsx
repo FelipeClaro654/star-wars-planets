@@ -1,3 +1,4 @@
+import React from "react";
 import useSpecie from "../hooks/useSpecie";
 
 type SpecieProps = {
@@ -16,4 +17,4 @@ const Specie = ({ specieUrl }: SpecieProps) => {
   return <div>{data?.name}</div>;
 };
 
-export default Specie;
+export default React.memo(Specie);
