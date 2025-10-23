@@ -5,22 +5,29 @@ import { Link } from "react-router-dom";
 type PlanetListProps = {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   goToPage(page: number): void;
+  searchTerm: string;
 };
 
 const PlanetListHeader = (props: PlanetListProps) => {
   return (
     <div className="flex gap-2 items-center">
-      <Link to="/" onClick={() => props.goToPage(1)}>
-        <img className=" max-h-50 overflow-hidden" src={Logo} alt="Logo" />{" "}
+      <Link
+        to="/"
+        onClick={() => {
+          props.goToPage(1);
+          props.setSearchTerm("");
+        }}
+      >
+        <img className=" max-h-50 overflow-hidden" src={Logo} alt="Logo" />
       </Link>
-
       <Input
         type="text"
         placeholder="Search by name"
-        onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
+        onChange={(e) => {
           const searchTerm = e.currentTarget.value;
           props.setSearchTerm(searchTerm);
         }}
+        value={props.searchTerm}
       />
     </div>
   );

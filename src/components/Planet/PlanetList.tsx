@@ -1,12 +1,11 @@
 import usePlanets from "../../hooks/usePlanets";
-import { Input } from "../ui/input";
 import { Spinner } from "../ui/spinner";
 import PlanetCard from "./PlanetCard";
 import PlanetPagination from "./PlanetPagination";
-import InfoAlerts from "../compounds/infoAlerts";
-
-import type { Planet } from "../../types/planet";
 import PlanetListHeader from "./PlanetListHeader";
+import ErrorAlerts from "../compounds/ErrorAlerts";
+import type { Planet } from "../../types/planet";
+import InfoAlerts from "../compounds/infoAlerts";
 
 const PlanetList = () => {
   const {
@@ -33,15 +32,26 @@ const PlanetList = () => {
   }
 
   if (error) {
-    return <InfoAlerts message={error?.message} />;
+    return <ErrorAlerts message={error?.message} />;
   }
+
+  const renderPlanets = () =>
+    planets?.map((planet: Planet) => (
+      <PlanetCard key={planet.id} {...planet} />
+    ));
 
   return (
     <div className="flex flex-col gap-1.5 m-1.5 w-full md:w-2xl">
-      <PlanetListHeader setSearchTerm={setSearchTerm} goToPage={goToPage} />
-      {planets?.map((planet: Planet) => (
-        <PlanetCard key={planet.id} {...planet} />
-      ))}
+      <PlanetListHeader
+        setSearchTerm={setSearchTerm}
+        goToPage={goToPage}
+        searchTerm={searchTerm}
+      />
+      {planets?.length ? (
+        renderPlanets()
+      ) : (
+        <InfoAlerts message="There are no planets with this name!" />
+      )}
 
       <PlanetPagination
         goToPage={goToPage}
