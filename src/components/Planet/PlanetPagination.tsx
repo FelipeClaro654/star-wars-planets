@@ -20,9 +20,9 @@ type PlanetPaginationProps = {
 
 const PlanetPagination = (props: PlanetPaginationProps) => {
   return (
-    <Card className="w-full max-w pr-3">
+    <Card className="w-full max-w">
       <CardDescription>
-        <CardAction className="flex gap-2">
+        <CardAction className="flex gap-2 w-full">
           <Pagination>
             <PaginationContent>
               <PaginationItem>
