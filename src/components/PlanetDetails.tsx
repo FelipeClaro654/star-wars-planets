@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import usePlanetDetails from "../hooks/usePlanetDetails";
 import ResidentsDetails from "./ResidentsDetails";
+import type { Planet } from "../types/planet";
 
 const PlanetDetails = () => {
   const { id } = useParams();
@@ -30,9 +31,8 @@ const PlanetDetails = () => {
             />
           );
         }
-
-        const keyInfo = `${key}: ${data[key]}`;
-        console.log({ keyInfo });
+        const value = data[key as keyof Planet];
+        const keyInfo = `${key}: ${value}`;
         return <div key={keyInfo}>{keyInfo}</div>;
       })}
     </div>

@@ -1,5 +1,4 @@
 import type { Film } from "../types/film";
-import type { Planet } from "../types/planet";
 import type { Resident } from "../types/resident";
 import type { Specie } from "../types/specie";
 import type { Vehicle } from "../types/vehicle";
@@ -11,7 +10,7 @@ export const fetchPlanets = async (page = 1) => {
   if (!response.ok) {
     throw new Error("Erro ao carregar planetas");
   }
-  const planets: Planet[] = await response.json();
+  const planets = await response.json();
   return planets;
 };
 
@@ -20,7 +19,7 @@ export const fetchPlanetDetail = async (id = 1) => {
   if (!response.ok) {
     throw new Error("Erro ao carregar detalhe do planeta");
   }
-  const planet: Planet = await response.json();
+  const planet = await response.json();
   return planet;
 };
 

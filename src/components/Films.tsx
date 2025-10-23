@@ -5,7 +5,6 @@ type FilmsProps = {
 };
 
 const Films = ({ filmsUrls }: FilmsProps) => {
-  console.log({ filmsUrls });
   return (
     <div>
       {filmsUrls.map((filmUrl) => (
