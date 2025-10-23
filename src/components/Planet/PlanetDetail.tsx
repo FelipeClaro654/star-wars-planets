@@ -1,6 +1,7 @@
 import { Label } from "../ui/label";
 import ResidentsDetails from "../Resident/ResidentsDetails";
 import type { Planet } from "@/types/planet";
+import { snakeCaseToCapitalized } from "@/utils/string";
 
 type PlanetDetail = {
   planetProp: keyof Planet;
@@ -19,7 +20,7 @@ const PlanetDetail = (props: PlanetDetail) => {
 
   return (
     <div className="flex gap-2">
-      <Label>{props.planetProp}:</Label>
+      <Label>{snakeCaseToCapitalized(props.planetProp)}:</Label>
       {props.value}
     </div>
   );
