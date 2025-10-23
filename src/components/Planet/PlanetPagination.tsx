@@ -16,9 +16,14 @@ type PlanetPaginationProps = {
   showPreviousPage(): void;
   showNextPage(): void;
   goToPage(page: number): void;
+  searchTerm: string;
 };
 
 const PlanetPagination = (props: PlanetPaginationProps) => {
+  if (props.searchTerm) {
+    return <></>;
+  }
+
   return (
     <Card className="w-full max-w">
       <CardDescription>

@@ -24,6 +24,7 @@ const PlanetList = () => {
     showPreviousPage,
     totalPages,
     goToPage,
+    searchTerm,
   } = usePlanets();
 
   if (!canShowList) {
@@ -66,6 +67,7 @@ const PlanetList = () => {
         showNextPage={showNextPage}
         showPreviousPage={showPreviousPage}
         totalPages={totalPages}
+        searchTerm={searchTerm}
       />
     </div>
   );

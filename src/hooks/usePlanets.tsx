@@ -64,16 +64,22 @@ const usePlanets = () => {
 
   const filteredPlanets = useMemo(() => {
     if (hasNextPage || isLoading) return [];
+
+    if (searchTerm) {
+      const planetsFilteredBySearchName = allResults?.filter((planet) =>
+        planet.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      return planetsFilteredBySearchName || [];
+    }
+
     const startItem = (page - 1) * 10 + 1;
     const endItem = Math.min(page * 10, Number(totalResults));
     const planetsInPage = allResults
       ?.sort(sortPlanetNames)
       .slice(startItem, endItem);
-    const planetsFilteredBySearchName = planetsInPage?.filter((planet) =>
-      planet.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
 
-    return planetsFilteredBySearchName || [];
+    return planetsInPage;
   }, [hasNextPage, isLoading, page, allResults, totalResults, searchTerm]);
 
   const showNextPage = useCallback(() => {
@@ -106,6 +112,7 @@ const usePlanets = () => {
     setSearchTerm,
     totalPages,
     goToPage,
+    searchTerm,
   };
 };
 
