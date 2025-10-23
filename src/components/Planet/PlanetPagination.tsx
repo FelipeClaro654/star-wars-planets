@@ -16,9 +16,13 @@ const PlanetPagination = (props: PlanetPaginationProps) => {
     <Card className="w-full max-w pr-3">
       <CardDescription>
         <CardAction className="flex gap-2">
-          <Label>
-            Current page: {props.currentPage} / {props.totalPages}
-          </Label>
+          <div className="flex flex-col items-center">
+            <Label>Current page:</Label>
+            <span>
+              {props.currentPage} / {props.totalPages}
+            </span>
+          </div>
+
           <Button
             disabled={!props.canGoToPreviousPage}
             onClick={props.showPreviousPage}

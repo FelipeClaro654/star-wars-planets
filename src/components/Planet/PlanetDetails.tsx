@@ -40,26 +40,32 @@ const PlanetDetails = () => {
   const omitedKeys = ["created", "surface_water", "edited", "url", "films"];
 
   return (
-    <Card className="m-2 h-full">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-1">
-          <EarthIcon size="20" /> {data.name}
-        </CardTitle>
-        <CardDescription>
-          <Separator className="mt-2 mb-2" />
-          {Object.keys(data).map((key) => {
-            if (omitedKeys.includes(key)) {
-              return;
-            }
-            const propName = key as keyof Planet;
-            const propValue = data[key as keyof Planet];
-            return (
-              <PlanetDetail key={key} planetProp={propName} value={propValue} />
-            );
-          })}
-        </CardDescription>
-      </CardHeader>
-    </Card>
+    <div className="flex flex-col gap-1.5 m-1.5 w-full md:w-2xl">
+      <Card className="h-full">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-1">
+            <EarthIcon size="20" /> {data.name}
+          </CardTitle>
+          <CardDescription>
+            <Separator className="mt-2 mb-2" />
+            {Object.keys(data).map((key) => {
+              if (omitedKeys.includes(key)) {
+                return;
+              }
+              const propName = key as keyof Planet;
+              const propValue = data[key as keyof Planet];
+              return (
+                <PlanetDetail
+                  key={key}
+                  planetProp={propName}
+                  value={propValue}
+                />
+              );
+            })}
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    </div>
   );
 };
 

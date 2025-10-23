@@ -44,7 +44,7 @@ const PlanetList = () => {
   }
 
   return (
-    <div className="flex flex-col gap-1.5 m-1.5">
+    <div className="flex flex-col gap-1.5 m-1.5 w-full md:w-2xl">
       <Input
         type="text"
         placeholder="Search by name"
