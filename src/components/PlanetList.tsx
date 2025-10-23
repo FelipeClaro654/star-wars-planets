@@ -1,22 +1,16 @@
-import { Link } from "react-router-dom";
 import usePlanets from "../hooks/usePlanets";
 
 import type { Planet } from "../types/planet";
-import Films from "./Films";
+
 import { Input } from "./ui/input";
 import { Spinner } from "./ui/spinner";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import { AlertCircleIcon, EarthIcon } from "lucide-react";
+import { AlertCircleIcon } from "lucide-react";
 
 import { Button } from "./ui/button";
-import {
-  Card,
-  CardAction,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import { Card, CardAction, CardDescription } from "./ui/card";
 import { Label } from "./ui/label";
+import PlanetCard from "./PlanetCard";
 
 const PlanetList = () => {
   const {
@@ -34,7 +28,11 @@ const PlanetList = () => {
   } = usePlanets();
 
   if (!canShowList) {
-    return <Spinner />;
+    return (
+      <div className="flex justify-center w-full h-screen items-center">
+        <Spinner className="size-40" />
+      </div>
+    );
   }
 
   if (isError) {
@@ -58,26 +56,7 @@ const PlanetList = () => {
         }}
       />
       {planets?.map((planet: Planet) => (
-        <Card className="w-full max-w" key={planet.name}>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-1">
-              <EarthIcon size="20" /> {planet.name}
-            </CardTitle>
-            <CardDescription>
-              <ul>
-                <li>{`Terrain: ${planet.terrain}`}</li>
-                <li>{`Diameter: ${planet.diameter}`}</li>
-                <li>{`Climate: ${planet.climate}`}</li>
-              </ul>
-              <Films filmsUrls={planet.films} />
-            </CardDescription>
-            <CardAction>
-              <Button variant="outline" size="sm">
-                <Link to={`/planets/${planet.id}`}>Details</Link>
-              </Button>
-            </CardAction>
-          </CardHeader>
-        </Card>
+        <PlanetCard {...planet} />
       ))}
 
       <Card className="w-full max-w pr-3">
