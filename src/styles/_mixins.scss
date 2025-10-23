@@ -1,0 +1,11 @@
+@mixin transition($prop: all, $duration: 0.3s, $func: ease-in-out) {
+  transition: $prop $duration $func;
+}
+
+button {
+  @include transition(background-color, 0.4s);
+}
+
+button:hover {
+  background-color: #e1cf07ae;
+}
