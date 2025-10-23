@@ -18,7 +18,6 @@ const PlanetDetails = () => {
   if (error) {
     return <>{error.message}</>;
   }
-  console.log({ data });
   return (
     <div>
       <div>{data.name}</div>
