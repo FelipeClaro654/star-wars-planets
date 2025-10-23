@@ -100,6 +100,7 @@ const usePlanets = () => {
     canGoToNextPage,
     canGoToPreviousPage,
     setSearchTerm,
+    totalPages,
   };
 };
 
