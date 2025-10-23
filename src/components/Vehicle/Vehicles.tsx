@@ -16,7 +16,7 @@ const Vehicles = ({ vehiclesUrls }: VehiclesProps) => {
       <Label className="font-bold">Vehicles:</Label>
       {hasNoVehicle && "-"}
       {vehiclesUrls.map((vehicleUrl) => (
-        <Vehicle vehicleUrl={vehicleUrl} />
+        <Vehicle key={vehicleUrl} vehicleUrl={vehicleUrl} />
       ))}
     </div>
   );

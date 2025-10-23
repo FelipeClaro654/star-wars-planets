@@ -4,9 +4,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { sortPlanetNames } from "../utils/sort";
 
 const usePlanets = () => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(
+    Number(localStorage.getItem("lastPage") || 1)
+  );
   const [searchTerm, setSearchTerm] = useState("");
-
   const {
     data,
     isLoading,
@@ -33,6 +34,10 @@ const usePlanets = () => {
     },
     staleTime: 360000,
   });
+
+  useEffect(() => {
+    localStorage.setItem("lastPage", String(page));
+  }, [page]);
 
   useEffect(() => {
     if (hasNextPage && !isFetchingNextPage) {
