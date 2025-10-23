@@ -4,10 +4,10 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "../ui/card";
 import { EarthIcon } from "lucide-react";
-import Films from "./Films";
-import { Button } from "./ui/button";
+import Films from "../Film/Films";
+import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import type { Planet } from "@/types/planet";
 

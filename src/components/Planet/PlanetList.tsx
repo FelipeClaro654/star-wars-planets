@@ -1,15 +1,15 @@
-import usePlanets from "../hooks/usePlanets";
+import usePlanets from "../../hooks/usePlanets";
 
-import type { Planet } from "../types/planet";
+import type { Planet } from "../../types/planet";
 
-import { Input } from "./ui/input";
-import { Spinner } from "./ui/spinner";
-import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import { Input } from "../ui/input";
+import { Spinner } from "../ui/spinner";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { AlertCircleIcon } from "lucide-react";
 
-import { Button } from "./ui/button";
-import { Card, CardAction, CardDescription } from "./ui/card";
-import { Label } from "./ui/label";
+import { Button } from "../ui/button";
+import { Card, CardAction, CardDescription } from "../ui/card";
+import { Label } from "../ui/label";
 import PlanetCard from "./PlanetCard";
 
 const PlanetList = () => {
@@ -56,7 +56,7 @@ const PlanetList = () => {
         }}
       />
       {planets?.map((planet: Planet) => (
-        <PlanetCard {...planet} />
+        <PlanetCard key={planet.id} {...planet} />
       ))}
 
       <Card className="w-full max-w pr-3">

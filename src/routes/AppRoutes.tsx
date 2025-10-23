@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import PlanetList from "../components/PlanetList";
-import PlanetDetails from "../components/PlanetDetails";
+import PlanetList from "../components/Planet/PlanetList";
+import PlanetDetails from "../components/Planet/PlanetDetails";
 
 export function AppRoutes() {
   return (
