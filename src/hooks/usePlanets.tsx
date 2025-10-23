@@ -6,6 +6,7 @@ import { sortPlanetNames } from "../utils/sort";
 const usePlanets = () => {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+
   const {
     data,
     isLoading,
