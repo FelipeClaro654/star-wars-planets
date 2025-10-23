@@ -6,6 +6,7 @@ import PlanetPagination from "./PlanetPagination";
 import InfoAlerts from "../compounds/infoAlerts";
 
 import type { Planet } from "../../types/planet";
+import PlanetListHeader from "./PlanetListHeader";
 
 const PlanetList = () => {
   const {
@@ -37,14 +38,7 @@ const PlanetList = () => {
 
   return (
     <div className="flex flex-col gap-1.5 m-1.5 w-full md:w-2xl">
-      <Input
-        type="text"
-        placeholder="Search by name"
-        onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
-          const searchTerm = e.currentTarget.value;
-          setSearchTerm(searchTerm);
-        }}
-      />
+      <PlanetListHeader setSearchTerm={setSearchTerm} goToPage={goToPage} />
       {planets?.map((planet: Planet) => (
         <PlanetCard key={planet.id} {...planet} />
       ))}
