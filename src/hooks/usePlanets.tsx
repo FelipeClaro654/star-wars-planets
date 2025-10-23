@@ -84,6 +84,10 @@ const usePlanets = () => {
     setPage((actualPage) => actualPage - 1);
   }, []);
 
+  const goToPage = useCallback((page: number) => {
+    setPage(page);
+  }, []);
+
   const canShowList = !isLoading && !isFetching && !hasNextPage;
   const canGoToNextPage = page < totalPages;
   const canGoToPreviousPage = page > 1;
@@ -101,6 +105,7 @@ const usePlanets = () => {
     canGoToPreviousPage,
     setSearchTerm,
     totalPages,
+    goToPage,
   };
 };
 

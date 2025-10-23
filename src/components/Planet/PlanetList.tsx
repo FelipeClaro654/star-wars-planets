@@ -23,6 +23,7 @@ const PlanetList = () => {
     showNextPage,
     showPreviousPage,
     totalPages,
+    goToPage,
   } = usePlanets();
 
   if (!canShowList) {
@@ -58,6 +59,7 @@ const PlanetList = () => {
       ))}
 
       <PlanetPagination
+        goToPage={goToPage}
         canGoToNextPage={canGoToNextPage}
         canGoToPreviousPage={canGoToPreviousPage}
         currentPage={currentPage}
