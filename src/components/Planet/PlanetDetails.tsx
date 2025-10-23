@@ -16,7 +16,7 @@ const PlanetDetails = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center w-full h-screen items-center p-2">
-        <Spinner className="size-40" />
+        <Spinner data-testid="spinner" className="size-40" />
       </div>
     );
   }

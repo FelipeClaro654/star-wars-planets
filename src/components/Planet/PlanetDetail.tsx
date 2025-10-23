@@ -1,7 +1,7 @@
 import { Label } from "../ui/label";
 import ResidentsDetails from "../Resident/ResidentsDetails";
 import type { Planet } from "@/types/planet";
-import { snakeCaseToCapitalized } from "@/utils/string";
+import { snakeCaseToCapitalized } from "../../utils/string";
 
 type PlanetDetail = {
   planetProp: keyof Planet;

@@ -37,7 +37,11 @@ const PlanetList = () => {
 
   const renderPlanets = () =>
     planets?.map((planet: Planet) => (
-      <PlanetCard key={planet.id} {...planet} />
+      <PlanetCard
+        data-testid={`planet-${planet.id}`}
+        key={planet.id}
+        {...planet}
+      />
     ));
 
   return (
