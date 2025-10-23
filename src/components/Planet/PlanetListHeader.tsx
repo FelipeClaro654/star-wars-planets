@@ -18,11 +18,11 @@ const PlanetListHeader = (props: PlanetListProps) => {
           props.setSearchTerm("");
         }}
       >
-        <img className=" max-h-50 overflow-hidden" src={Logo} alt="Logo" />
+        <img className="max-h-50 overflow-hidden" src={Logo} alt="Logo" />
       </Link>
       <Input
         type="text"
-        placeholder="Search by name"
+        placeholder="Search planet..."
         onChange={(e) => {
           const searchTerm = e.currentTarget.value;
           props.setSearchTerm(searchTerm);
