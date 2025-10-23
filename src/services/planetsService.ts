@@ -1,4 +1,5 @@
 import type { Film } from "../types/film";
+import type { Planet } from "../types/planet";
 import type { Resident } from "../types/resident";
 import type { Specie } from "../types/specie";
 import type { Vehicle } from "../types/vehicle";
@@ -19,7 +20,7 @@ export const fetchPlanetDetail = async (id = 1) => {
   if (!response.ok) {
     throw new Error("Erro ao carregar detalhe do planeta");
   }
-  const planet = await response.json();
+  const planet: Planet = await response.json();
   return planet;
 };
 
