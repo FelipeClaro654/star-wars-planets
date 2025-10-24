@@ -10,7 +10,7 @@ type PlanetListProps = {
 
 const PlanetListHeader = (props: PlanetListProps) => {
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex gap-2 items-center w-full self-center md:w-2xl">
       <Link
         to="/"
         onClick={() => {

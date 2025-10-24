@@ -1,29 +1,12 @@
-import usePlanets from "../../hooks/usePlanets";
 import { Spinner } from "../ui/spinner";
 import PlanetCard from "./PlanetCard";
 import PlanetPagination from "./PlanetPagination";
-import PlanetListHeader from "./PlanetListHeader";
 import ErrorAlerts from "../compounds/ErrorAlerts";
-import type { Planet } from "../../types/planet";
 import InfoAlerts from "../compounds/infoAlerts";
+import type { Planet } from "../../types/planet";
 
-const PlanetList = () => {
-  const {
-    error,
-    canShowList,
-    planets,
-    setSearchTerm,
-    canGoToNextPage,
-    canGoToPreviousPage,
-    currentPage,
-    showNextPage,
-    showPreviousPage,
-    totalPages,
-    goToPage,
-    searchTerm,
-  } = usePlanets();
-
-  if (!canShowList) {
+const PlanetList = ({ planetsData }: any) => {
+  if (!planetsData.canShowList) {
     return (
       <div className="flex justify-center w-full h-screen items-center">
         <Spinner className="size-40" />
@@ -31,12 +14,12 @@ const PlanetList = () => {
     );
   }
 
-  if (error) {
-    return <ErrorAlerts message={error?.message} />;
+  if (planetsData.error) {
+    return <ErrorAlerts message={planetsData.error?.message} />;
   }
 
   const renderPlanets = () =>
-    planets?.map((planet: Planet) => (
+    planetsData.planets?.map((planet: Planet) => (
       <PlanetCard
         data-testid={`planet-${planet.id}`}
         key={planet.id}
@@ -45,29 +28,24 @@ const PlanetList = () => {
     ));
 
   return (
-    <div className="flex flex-col gap-1.5 m-1.5 w-full md:w-2xl">
-      <PlanetListHeader
-        setSearchTerm={setSearchTerm}
-        goToPage={goToPage}
-        searchTerm={searchTerm}
-      />
-      {planets?.length ? (
+    <>
+      {planetsData.planets?.length ? (
         renderPlanets()
       ) : (
         <InfoAlerts message="There are no planets with this name!" />
       )}
 
       <PlanetPagination
-        goToPage={goToPage}
-        canGoToNextPage={canGoToNextPage}
-        canGoToPreviousPage={canGoToPreviousPage}
-        currentPage={currentPage}
-        showNextPage={showNextPage}
-        showPreviousPage={showPreviousPage}
-        totalPages={totalPages}
-        searchTerm={searchTerm}
+        goToPage={planetsData.goToPage}
+        canGoToNextPage={planetsData.canGoToNextPage}
+        canGoToPreviousPage={planetsData.canGoToPreviousPage}
+        currentPage={planetsData.currentPage}
+        showNextPage={planetsData.showNextPage}
+        showPreviousPage={planetsData.showPreviousPage}
+        totalPages={planetsData.totalPages}
+        searchTerm={planetsData.searchTerm}
       />
-    </div>
+    </>
   );
 };
 

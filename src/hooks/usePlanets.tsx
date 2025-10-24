@@ -2,12 +2,10 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchPlanets } from "../services/planetsService";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { sortPlanetNames } from "../utils/sort";
-import { useSearchParams } from "react-router-dom";
 
 const usePlanets = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
+  const [page, setPage] = useState(1);
 
   const {
     data,
@@ -35,11 +33,6 @@ const usePlanets = () => {
     },
     staleTime: 360000,
   });
-
-  useEffect(() => {
-    searchParams.set("page", String(page));
-    setSearchParams(searchParams);
-  }, [page, searchParams, setSearchParams]);
 
   useEffect(() => {
     if (hasNextPage && !isFetchingNextPage) {
